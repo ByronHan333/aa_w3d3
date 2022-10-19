@@ -118,6 +118,42 @@ end
 # p bsearch(array, 4)
 # p bsearch(array, 5)
 
-def method_name
-  
+
+
+
+
+
+def merge(arr1, arr2)
+    i1 = 0
+    i2 = 0
+    resarr = []
+    
+    while i1 < arr1.length && i2 < arr2.length 
+        if arr1[i1] < arr2[i2]
+            resarr << arr1[i1]
+            i1 += 1
+        else
+            resarr << arr2[i2]
+            i2 += 1
+        end
+    end
+
+    resarr.concat(arr1[i1..-1]) if i2 == arr2.length
+    resarr.concat(arr2[i2..-1]) if i1 == arr1.length
+    resarr
 end
+
+
+
+
+def merge_sort(array)
+    return array if array.length == 1
+    mid_idx = array.length / 2
+    array_1, array_2 = array[0...mid_idx], array[mid_idx..-1]
+    merge(merge_sort(array_1), merge_sort(array_2))
+
+end
+
+
+arr = [38, 27, 43, 3, 9, 82, 10]
+merge_sort(arr)
