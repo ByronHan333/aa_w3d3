@@ -49,7 +49,7 @@ def deep_dup(array)
     return array.dup if array.empty?
 
     array.map do |ele|
-        if ele.is_a?(Array) 
+        if ele.is_a?(Array)
             deep_dup(ele)
         else
             ele
@@ -78,3 +78,46 @@ deep_dup(robot_parts)
 # deep_dup(arr3)
 # q = deep_dup(arr4)
 
+def fib(n)
+  return [0] if n == 1
+  return [0,1] if n == 2
+  fib_arr = fib(n-1)
+  sum = fib_arr[-1]+fib_arr[-2]
+  fib_arr << sum
+end
+
+# p fib(1)
+# p fib(3)
+# p fib(4)
+# p fib(5)
+# p fib(8)
+
+def bsearch(array, target)
+  mid_idx = array.length / 2
+  mid_ele = array[mid_idx]
+  # print "#{mid_ele}\n"
+  return mid_idx if mid_ele == target
+  if mid_ele > target
+    partition = array[0...mid_idx]
+    # return mid_idx - bsearch(partition, target)
+    return bsearch(partition, target)
+
+  else
+    partition = array[mid_idx..-1]
+    return mid_idx + bsearch(partition, target)
+    # return bsearch(partition, target)
+  end
+
+end
+
+# array = [0,1,2,3,4,5]
+# p bsearch(array, 0)
+# p bsearch(array, 1)
+# p bsearch(array, 2)
+# p bsearch(array, 3)
+# p bsearch(array, 4)
+# p bsearch(array, 5)
+
+def method_name
+  
+end
