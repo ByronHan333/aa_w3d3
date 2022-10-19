@@ -6,7 +6,8 @@
 # to add up all the integers in a given array.
 
 def recursive_sum(array)
-  # Your code here
+  return 0 if array.length == 0
+  array[0] + recursive_sum(array[1..-1])
 end
 
 # Problem 2: `reverse_string`
@@ -16,7 +17,9 @@ end
 # to solve this problem.
 
 def reverse_string(str)
-  # Your code here
+  return "" if str.empty?
+  return str if str.length == 1
+  reverse_string(str[1..-1]) + str[0]
 end
 
 # Problem 3: `sorted?`
@@ -27,7 +30,8 @@ end
 # method.
 
 def sorted?(array)
-  # Your code here
+  return true if array.empty? || array.length == 1
+  array[0] <= array[1] && sorted?(array[1..-1])
 end
 
 # Problem 4: `update_order_total`
@@ -40,15 +44,42 @@ end
 # problem.
 #
 # Sample update:
-# update = [
+# updates = [
 #     { name: "Lettuce", price: 3.57, status: "add" },
 #     { name: "Avacado", price: 0.99, status: "remove" },
 #     { name: "Salmon", price: 15.99, status: nil }
 # ]
 
+
+
 def update_order_total(total, updates) 
-  # Your code here
+  return total if updates.empty?
+  order_0 = updates[0]
+
+  change = -order_0[:price] if order_0[:status] == "remove"
+  change = order_0[:price] if order_0[:status] == "add"
+  change = 0 if order_0[:status] == nil
+
+  change + update_order_total(total, updates[1..-1]) 
 end
+
+
+
+
+# def update_order_total(total, updates) 
+#   return 0 if updates.empty?
+#   order_0 = updates[0]
+
+#   p order_0["price"]
+#   p order_0["status"]
+
+  # change = -order_0["price"] if order_0["status"] == "remove"
+  # change = order_0["price"] if order_0["status"] == "add"
+
+  # change + update_order_total(0, updates[1..-1])
+# end
+
+# update_order_total(0, updates) 
 
 # Problem 5: Refactor an iterative solution into a recursive solution
 #
