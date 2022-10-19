@@ -43,3 +43,38 @@ end
 # p exponent_v2(2, 3)
 # p exponent_v2(2, 4)
 # p exponent_v2(2, 5)
+
+
+def deep_dup(array)
+    return array.dup if array.empty?
+
+    array.map do |ele|
+        if ele.is_a?(Array) 
+            deep_dup(ele)
+        else
+            ele
+        end
+    end
+end
+
+
+robot_parts = [
+  ["nuts", "bolts", "washers"],
+  ["capacitors", "resistors", "inductors"]
+]
+
+deep_dup(robot_parts)
+
+
+# arr1 = []
+# arr2 = [1]
+# arr3 = [1,2]
+
+# y = [2]
+# arr4 = [1,y]
+
+# y = deep_dup(arr1)
+# deep_dup(arr2)
+# deep_dup(arr3)
+# q = deep_dup(arr4)
+
