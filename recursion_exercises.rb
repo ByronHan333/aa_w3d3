@@ -172,3 +172,21 @@ end
 # p subsets([1])
 # p subsets([1,2])
 # p subsets([1,2,3])
+
+
+def permutations(array)
+    return [array] if array.length == 1
+    resarr = []
+
+    array.each_with_index do |num, idx|
+        permutedsub = permutations(array[0...idx] + array[idx +1..-1])
+        permutedsub.each do |arr|
+            resarr << [num].concat(arr)
+        end 
+    end
+
+    resarr
+end
+
+array = [1,2,3]
+permutations(array)
