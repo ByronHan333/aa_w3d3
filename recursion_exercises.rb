@@ -158,30 +158,17 @@ end
 # arr = [38, 27, 43, 3, 9, 82, 10]
 # merge_sort(arr)
 
-# def subsets(arr)
-#   return [[]] if arr.empty?
-#   num = arr[0]
-#   subsets(arr[1..-1]).each do |subarr|
-#     subarr << [num]
-#   end
-#   arr
-# end
-
 def subsets(arr)
   return [[]] if arr.empty?
-  return [arr[0]].concat(subsets([])) if arr.length == 1
-  first_ele_result = subsets([arr[0]])
-  rest_arr_result = subsets([arr[1..-1]])
-  [arr].concat(first_ele_result, rest_arr_result)
+  sub_arrs = subsets(arr[1..-1])
+  modified = sub_arrs.map do |a|
+    a += [arr[0]]
+  end
+  sub_arrs.concat(modified)
 end
 
 
-
-def subsets(arr)
-  subsets(arr[1..-1])
-end
-
-p subsets([])
-p subsets([1])
-p subsets([1,2])
-p subsets([1,2,3])
+# p subsets([])
+# p subsets([1])
+# p subsets([1,2])
+# p subsets([1,2,3])
