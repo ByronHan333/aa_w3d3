@@ -19,14 +19,31 @@ class WordChainer
     res_arr
   end
 
-  def method_name
-    
+  def explore_current_words
+    new_current_words = []
+
+    @current_words.each do |word|
+      adjacent_words(word).each do |adj_word|
+        next if @all_seen_words.include?(adj_word)
+        new_current_words << adj_word
+        @all_seen_words << adj_word
+      end
+    end
+    new_current_words
   end
 
+  def run(source, target)
+    @current_words = [source]
+    @all_seen_words = [source]
+    until @current_words.empty?
+      p @current_words = explore_current_words
+    end
+    
+  end
 
 
 end
 
 w = WordChainer.new('dictionary.txt')
-p w.dictionary
-p w.adjacent_words('cat')
+# p w.dictionary
+p w.run('cat','bat')
