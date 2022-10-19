@@ -64,4 +64,4 @@ end
 
 w = WordChainer.new('dictionary.txt')
 # p w.dictionary
-p w.run('duck','ruby')
+p w.run('barker','market')
