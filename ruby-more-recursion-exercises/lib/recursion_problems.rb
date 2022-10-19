@@ -1,6 +1,6 @@
 # Extra Recursion Practice Problems
 
-# Problem 1: `recursive_sum` 
+# Problem 1: `recursive_sum`
 #
 # Write a method, `recursive_sum`, that receives an array and uses recursion
 # to add up all the integers in a given array.
@@ -52,7 +52,7 @@ end
 
 
 
-def update_order_total(total, updates) 
+def update_order_total(total, updates)
   return total if updates.empty?
   order_0 = updates[0]
 
@@ -60,26 +60,9 @@ def update_order_total(total, updates)
   change = order_0[:price] if order_0[:status] == "add"
   change = 0 if order_0[:status] == nil
 
-  change + update_order_total(total, updates[1..-1]) 
+  change + update_order_total(total, updates[1..-1])
 end
 
-
-
-
-# def update_order_total(total, updates) 
-#   return 0 if updates.empty?
-#   order_0 = updates[0]
-
-#   p order_0["price"]
-#   p order_0["status"]
-
-  # change = -order_0["price"] if order_0["status"] == "remove"
-  # change = order_0["price"] if order_0["status"] == "add"
-
-  # change + update_order_total(0, updates[1..-1])
-# end
-
-# update_order_total(0, updates) 
 
 # Problem 5: Refactor an iterative solution into a recursive solution
 #
@@ -101,6 +84,26 @@ def iterative_solution(data) # DO NOT MODIFY THIS METHOD
   by_completion
 end
 
+def recursive_solution(data)
+  if data.length == 1
+    if data[0][:isComplete]
+      return  { complete: [data[0][:name]], incomplete: [] }
+    else
+      return  { complete: [], incomplete: [data[0][:name]] }
+    end
+  end
+
+  hash = recursive_solution(data[0..-2])
+  person = data[-1]
+
+  if person[:isComplete]
+    hash[:complete] << person[:name]
+  else
+    hash[:incomplete] << person[:name]
+  end
+  hash
+end
+
 # Your code here
 
 # Problem 6: Debug a Recursive Solution
@@ -108,7 +111,7 @@ end
 # `palindrome?` is a recursive method that returns a boolean to indicate
 # whether or not the given `string` is a valid palindrome. At least, that is
 # what it is supposed to do. Unfortunately, it doesn't work at the moment, and
-# the programmer has asked you to help debug it. 
+# the programmer has asked you to help debug it.
 #
 # Look carefully at the test cases to determine any edge cases that must be
 # accounted for. You can also use `byebug` with debuggers, `p` statements, or
@@ -118,12 +121,12 @@ end
 #
 # Note: The `gsub` call is not a problem.
 
-def palindrome?(string) 
+def palindrome?(string)
   return true if string.empty?
-  
+
   cleanedString = string.gsub(/ |,/, "").downcase
-  if cleanedString[0] = cleanedString[-1]
-    return palindrome?(cleanedString[1...-2])
+  if cleanedString[0] == cleanedString[-1]
+    return palindrome?(cleanedString[1..-2])
   end
   false
 end
