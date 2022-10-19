@@ -127,8 +127,8 @@ def merge(arr1, arr2)
     i1 = 0
     i2 = 0
     resarr = []
-    
-    while i1 < arr1.length && i2 < arr2.length 
+
+    while i1 < arr1.length && i2 < arr2.length
         if arr1[i1] < arr2[i2]
             resarr << arr1[i1]
             i1 += 1
@@ -155,5 +155,33 @@ def merge_sort(array)
 end
 
 
-arr = [38, 27, 43, 3, 9, 82, 10]
-merge_sort(arr)
+# arr = [38, 27, 43, 3, 9, 82, 10]
+# merge_sort(arr)
+
+# def subsets(arr)
+#   return [[]] if arr.empty?
+#   num = arr[0]
+#   subsets(arr[1..-1]).each do |subarr|
+#     subarr << [num]
+#   end
+#   arr
+# end
+
+def subsets(arr)
+  return [[]] if arr.empty?
+  return [arr[0]].concat(subsets([])) if arr.length == 1
+  first_ele_result = subsets([arr[0]])
+  rest_arr_result = subsets([arr[1..-1]])
+  [arr].concat(first_ele_result, rest_arr_result)
+end
+
+
+
+def subsets(arr)
+  subsets(arr[1..-1])
+end
+
+p subsets([])
+p subsets([1])
+p subsets([1,2])
+p subsets([1,2,3])
