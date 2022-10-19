@@ -26,24 +26,42 @@ class WordChainer
       adjacent_words(word).each do |adj_word|
         next if @all_seen_words.include?(adj_word)
         new_current_words << adj_word
-        @all_seen_words << adj_word
+        @all_seen_words[adj_word] = word
       end
     end
+
+    # new_current_words.each do |ncword|
+      # puts ncword + ' ' + @all_seen_words[ncword]
+    # end
     new_current_words
   end
 
   def run(source, target)
     @current_words = [source]
-    @all_seen_words = [source]
+    @all_seen_words = {source => nil}
     until @current_words.empty?
-      p @current_words = explore_current_words
+      @current_words = explore_current_words
     end
-    
+    build_path(target)
   end
+
+  def build_path(target)
+    path = [target]
+    print "#{@all_seen_words[target]}, #{target}\n"
+    while @all_seen_words[target]
+      path << @all_seen_words[target]
+      target = path.last
+    end
+    path
+  end
+
+
+
+
 
 
 end
 
 w = WordChainer.new('dictionary.txt')
 # p w.dictionary
-p w.run('cat','bat')
+p w.run('duck','ruby')
