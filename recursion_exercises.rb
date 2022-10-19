@@ -182,11 +182,28 @@ def permutations(array)
         permutedsub = permutations(array[0...idx] + array[idx +1..-1])
         permutedsub.each do |arr|
             resarr << [num].concat(arr)
-        end 
+        end
     end
 
     resarr
 end
 
-array = [1,2,3]
-permutations(array)
+# array = [1,2,3]
+# permutations(array)
+
+def make_change(target, coin_arr)
+  return [] if target == 0
+  res_arr = []
+  coin_arr.each do |coin|
+    if target >= coin
+      target -= coin
+      res_arr << coin
+      break
+    end
+
+  end
+  res_arr.concat(make_change(target, coin_arr))
+end
+
+# p make_change(39, [25,10,5,1])
+# p make_change(14, [10, 7, 1])
